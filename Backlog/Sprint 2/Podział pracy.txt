@@ -1,1 +1,11 @@
-...
+Implementacja				-
+
+   - poruszanie Pac-Manem		-
+
+   - wykrywanie kolizji			-
+
+   - umieszczenie 2 graczy		-
+
+
+
+Overall workload			-

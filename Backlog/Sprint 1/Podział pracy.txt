@@ -1,1 +1,46 @@
-...
+Architektura				- 5,5h
+
+   - wstêpny diagram klas		- 4,5h
+		£ukasz Ujma		- Architekt
+		Aleksander Giera	– Architekt
+
+   - diagram przypadków	u¿ycia		- 1h
+		£ukasz Ujma		- Architekt
+		Aleksander Giera	– Architekt
+
+
+
+Grafika					- 14,5h
+
+   - wybór formatu grafik		- 1,5h
+		Alicja Frankowicz	– Programista/Grafik
+		Grzegorz Ryniak		– Programista/Grafik
+
+   - tworzenie planszy			- 5h
+		Alicja Frankowicz	– Programista/Grafik
+		Grzegorz Ryniak		– Programista/Grafik
+
+   - grafiki animacji postaci		- 8h
+		Alicja Frankowicz	– Programista/Grafik
+		Grzegorz Ryniak		– Programista/Grafik
+
+
+
+Implementacja				- 34,5h
+
+   - menu gry				- 17h
+		Karol Cwynar		- Programista
+		Mateusz Ciechan		– Product owner
+		Kamil Oleszek		– Scrum master
+
+   - opcje i ich zapis			- 11h
+		Karol Cwynar		- Programista
+		Mateusz Ciechan		– Product owner
+		Kamil Oleszek		– Scrum master
+
+   - wstêpne wyswietlanie planszy	- 6,5h
+		Grzegorz Ryniak		– Programista/Grafik
+
+
+
+Overall workload			- 54,5h
