@@ -1,1 +1,7 @@
-...
+Implementacja				- 20,5h
+
+   - umieszczenie Pac-Manów na planszy	- 4,5h
+
+   - AI duchów				- 16h
+
+Overall workload			- 20,5h

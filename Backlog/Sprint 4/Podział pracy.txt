@@ -1,1 +1,11 @@
-...
+Implementacja				- 26h
+
+   - kolizje z duchami i przeciwnikiem	- 8h
+
+   - Zapisywanie i wczytywanie wyników	- 5,5h
+
+   - Boost				- 9h
+
+   - Muzyka				- 3,5h
+
+Overall workload			- 26h

@@ -1,11 +1,11 @@
-Implementacja				-
+Implementacja				- 21h
 
-   - poruszanie Pac-Manem		-
+   - poruszanie Pac-Manem		- 10h
 
-   - wykrywanie kolizji			-
+   - wykrywanie kolizji	ze œcianami	- 6,5h
 
-   - umieszczenie 2 graczy		-
+   - zliczanie punktów			- 4,5h
 
 
 
-Overall workload			-
+Overall workload			- 21h
