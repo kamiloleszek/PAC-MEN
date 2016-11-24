@@ -5,7 +5,7 @@
  */
 package menu;
 
-import game.GameScreen;
+import game.GameFrame;
 
 /**
  *
@@ -110,7 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new GameScreen().show();
+        new GameFrame().show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void menuExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitButtonActionPerformed
