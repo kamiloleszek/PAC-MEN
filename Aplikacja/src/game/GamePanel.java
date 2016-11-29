@@ -7,28 +7,43 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author gregory
  */
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel  implements KeyListener{
     private BufferedImage _backgroundImage;
+    private ArrayList<DrawableObject> _gameObjects;
+    private GameLogic _gameLogic;
+    
     public GamePanel()
     {               
-        MapLayout layout = new MapLayout("./res/maps/map1.cfg");
-        SegmentMapContainer segment;
+
         try
         {
-           segment = new SegmentMapContainer("./res/images/walls",32,32);
-           _backgroundImage = MapBuilder.createMap(segment, layout);
-           this.setSize(_backgroundImage.getWidth(), _backgroundImage.getHeight());
+            MapLayout layout = new MapLayout("./res/maps/map1.cfg");  
+            Properties properties = new Properties();
+            ImageSet imageSet = new ImageSet("./res/images/", 32);     
+            _gameLogic = new GameLogic(layout, properties, imageSet); 
+            _backgroundImage = _gameLogic.getMap();
+            _gameObjects = _gameLogic.getGameObjects();
+
+            this.setSize(_backgroundImage.getWidth(), _backgroundImage.getHeight());
+            addKeyListener(this);
+            setFocusable(true);
+
         }
-        catch(Exception ex)
+        catch(IOException ex)
         {
             System.out.println(ex);
         }
@@ -42,6 +57,30 @@ public class GamePanel extends JPanel{
         g2d.drawRect(12, 12, 20, 20);
         
         g2d.drawImage(_backgroundImage, null, 0, 0);
+        
+        for(DrawableObject obj : _gameObjects)
+        {
+            g2d.drawImage(obj.getImage(), null, obj.getX(), obj.getY());
+        }
+    }
+    
+    public void updateGame()
+    {
+        _gameLogic.updateLogic();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        _gameLogic.keyActionPressed(e.getKeyCode());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        _gameLogic.keyActionReleased(e.getKeyCode());
     }
     
 }

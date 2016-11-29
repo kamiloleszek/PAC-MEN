@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/karol/WAIO/WaioMenu/src/waiomenu/MainMenu.java</file>
-            <file>file:/home/karol/WAIO/WaioMenu/src/waiomenu/Settings.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/ImageSet.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/MovableObject.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/GameObject.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/GameLogic.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/GamePanel.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/GameFrame.java</file>
+            <file>file:/home/gregory/Dokumenty/Studia%20-%20semestry/Semestr%207/WAIO/PAC-MEN/Aplikacja/src/game/MapBuilder.java</file>
         </group>
     </open-files>
 </project-private>

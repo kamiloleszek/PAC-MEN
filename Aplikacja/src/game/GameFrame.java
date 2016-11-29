@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
  *
  * @author gregory
  */
-public class GameFrame extends javax.swing.JFrame implements KeyListener{
+public class GameFrame extends javax.swing.JFrame{
 
     private boolean running = false;
     /**
@@ -22,7 +22,6 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
     public GameFrame() {
         initComponents();
         runGameLoop();
-        addKeyListener(this);
     }
     
     public void runGameLoop()
@@ -40,7 +39,11 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
     }
     
     public void gameMainLoop()
-    {        
+    {
+        final double TARGET_FPS = 60;
+        final double TARGET_TIME_BW_FRAMES = 1e9 / TARGET_FPS;
+        
+        
         while(running)
         {
             double lastRenderTime = System.nanoTime();
@@ -68,7 +71,7 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
     
     private void updateGame()
     {
-        
+        ((GamePanel)gamePanel).updateGame();
     }
         
     private void drawGame()
@@ -171,18 +174,4 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JPanel gamePanel;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println("Key typed");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("Key pressed");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("Key released");
-    }
 }

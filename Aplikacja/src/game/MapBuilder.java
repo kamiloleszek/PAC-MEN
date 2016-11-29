@@ -15,18 +15,17 @@ import java.awt.image.BufferedImage;
  * @author gregory
  */
 public class MapBuilder {
-    public static BufferedImage createMap(SegmentMapContainer mapCont, MapLayout mapLayout)
+    public static BufferedImage createMap(ImageSet imageSet, MapLayout mapLayout)
     {
         
         int segmentXNum = mapLayout.getWidth();
         int segmentYNum = mapLayout.getHeight();
-        int segmentWidth = mapCont.getSegmentWidth();
-        int segmentHeight = mapCont.getSegmentHeight();
-        int mapWidth = mapCont.getSegmentWidth() * mapLayout.getWidth();
-        int mapHeight = mapCont.getSegmentHeight() * mapLayout.getHeight();
+        int segmentSize = imageSet.getSegmentSize();
+        int mapWidth = segmentSize * (mapLayout.getWidth()-2);
+        int mapHeight = segmentSize * (mapLayout.getHeight()-2);
         int[][] mapLayoutData = mapLayout.getLayout();
         
-        BufferedImage[] segmentImages = mapCont.getImages();
+        BufferedImage[] segmentImages = imageSet.getWalls();
         
         BufferedImage map = new BufferedImage(mapWidth, mapHeight, BufferedImage.TYPE_3BYTE_BGR);
         
@@ -36,10 +35,8 @@ public class MapBuilder {
         {
             for(int j = 1;j<segmentYNum-1;j++)
             {
-                
-                
                 BufferedImage segmentImage = selectAndRotateSegment(i,j,mapLayoutData, segmentImages);
-                graphics.drawImage(segmentImage,i*segmentWidth, j*segmentHeight,null);
+                graphics.drawImage(segmentImage,(i-1)*segmentSize, (j-1)*segmentSize,null);
             }
         }
         
