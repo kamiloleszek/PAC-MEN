@@ -5,6 +5,7 @@
  */
 package game;
 
+import constants.GameConstants;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -39,11 +40,7 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
     }
     
     public void gameMainLoop()
-    {
-        final double TARGET_FPS = 30;
-        final double TARGET_TIME_BW_FRAMES = 10e9 / TARGET_FPS;
-        
-        
+    {        
         while(running)
         {
             double lastRenderTime = System.nanoTime();
@@ -51,7 +48,7 @@ public class GameFrame extends javax.swing.JFrame implements KeyListener{
             updateGame();
             
             double now = System.nanoTime();
-            while(now - lastRenderTime < TARGET_TIME_BW_FRAMES)
+            while(now - lastRenderTime < GameConstants.TARGET_TIME_BW_FRAMES)
             {
                 Thread.yield();
                 try
