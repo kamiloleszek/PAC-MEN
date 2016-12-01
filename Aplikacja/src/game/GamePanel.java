@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.io.IOException;
 import java.util.ArrayList;
+import utils.Settings;
 
 /**
  *
@@ -32,9 +33,9 @@ public class GamePanel extends JPanel  implements KeyListener{
         try
         {
             MapLayout layout = new MapLayout("./res/maps/map1.cfg");  
-            Properties properties = new Properties();
+            Settings settings = new Settings();
             ImageSet imageSet = new ImageSet("./res/images/", 32);     
-            _gameLogic = new GameLogic(layout, properties, imageSet); 
+            _gameLogic = new GameLogic(layout, settings, imageSet); 
             _backgroundImage = _gameLogic.getMap();
             _gameObjects = _gameLogic.getGameObjects();
 

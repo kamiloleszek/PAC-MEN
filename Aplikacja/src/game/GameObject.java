@@ -15,10 +15,14 @@ public class GameObject implements DrawableObject{
     
     protected int _posX;
     protected int _posY;
-    protected BufferedImage _image;
+    protected BufferedImage[] _images;
+    private int currentImage;
+    private boolean animDirection;
     
-    public GameObject(BufferedImage image){
-        _image = image;
+    public GameObject(BufferedImage[] images){
+        _images = images;
+        currentImage = 0;
+        animDirection = true;
     }
     
     public void setX(int x){
@@ -41,7 +45,20 @@ public class GameObject implements DrawableObject{
 
     @Override
     public BufferedImage getImage() {
-        return _image;
+        if(animDirection) {
+            if(currentImage == _images.length-1) {
+                animDirection = !animDirection; 
+            } else {
+                ++currentImage;
+            }
+        } else {
+            if(currentImage == 0) {
+                animDirection = !animDirection; 
+            } else {
+                --currentImage;
+            }
+        }
+        return _images[currentImage];
     }
     
     

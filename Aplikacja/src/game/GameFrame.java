@@ -39,11 +39,7 @@ public class GameFrame extends javax.swing.JFrame{
     }
     
     public void gameMainLoop()
-    {
-        final double TARGET_FPS = 60;
-        final double TARGET_TIME_BW_FRAMES = 1e9 / TARGET_FPS;
-        
-        
+    {     
         while(running)
         {
             double lastRenderTime = System.nanoTime();

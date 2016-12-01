@@ -19,14 +19,25 @@ public class ImageSet {
     static final String COIN_DIR = "coin/";
     static final String GHOST_DIR = "ghost1/";
     static final String PACMAN_DIR = "pacman/";
+    static final int ANIM_SIZE = 8;
     
     public ImageSet(String path, int segSize) throws IOException
     {
         _segmentSize = segSize;
         _walls = new BufferedImage[6];
-        _pacman = ImageIO.read(new File(path + PACMAN_DIR + "8.bmp"));
+        
+        _pacman = new BufferedImage[ANIM_SIZE];
+        for(int i = 1; i <= ANIM_SIZE; ++i) {
+            _pacman[i-1] = ImageIO.read(new File(path + PACMAN_DIR + i +".bmp"));            
+        }
+        
         _coin = ImageIO.read(new File(path + COIN_DIR + "coin.bmp"));
-        _ghost = ImageIO.read(new File(path + GHOST_DIR + "1.bmp"));
+        //_ghost = ImageIO.read(new File(path + GHOST_DIR + "1.bmp"));
+        
+        _ghost = new BufferedImage[ANIM_SIZE];
+        for(int i = 1; i <= ANIM_SIZE; ++i) {
+            _ghost[i-1] = ImageIO.read(new File(path + GHOST_DIR + i + ".bmp"));            
+        }
         
         for(int i = 0;i<6;i++)
         {
@@ -39,12 +50,12 @@ public class ImageSet {
         return _coin;
     }
     
-    public BufferedImage getPacman()
+    public BufferedImage[] getPacman()
     {
         return _pacman;
     }
     
-    public BufferedImage getGhost()
+    public BufferedImage[] getGhost()
     {
         return _ghost;
     }
@@ -58,8 +69,8 @@ public class ImageSet {
     {
         return _segmentSize;
     }
-    private BufferedImage _pacman;
-    private BufferedImage _ghost;
+    private BufferedImage[] _pacman;
+    private BufferedImage[] _ghost;
     private BufferedImage _coin;
     private BufferedImage[] _walls;
     private int _segmentSize;

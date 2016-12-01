@@ -21,9 +21,9 @@ public class MovableObject extends GameObject {
     private int _destY;
     private int _movingProgress = 0;
 
-    public MovableObject(BufferedImage image, int speed) {
-        super(image);
-        _segmentSize = image.getHeight();
+    public MovableObject(BufferedImage[] images, int speed) {
+        super(images);
+        _segmentSize = images[0].getHeight();
         _speed = speed;
         _movingSteps = (float) _segmentSize / _speed;
     }
