@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
  */
 public class MovableObject extends GameObject {
 
-    private int _segmentSize;
     private float _movingSteps;
     private int _speed;
     private int _moveState = 0; //0 - none, 1 - left, 2 - up, 3 - right, 4 down
@@ -21,9 +20,8 @@ public class MovableObject extends GameObject {
     private int _destY;
     private int _movingProgress = 0;
 
-    public MovableObject(BufferedImage[] images, int speed) {
-        super(images);
-        _segmentSize = images[0].getHeight();
+    public MovableObject(BufferedImage[] images, int meshPosX, int meshPosY, int speed) {
+        super(images, meshPosX, meshPosY);
         _speed = speed;
         _movingSteps = (float) _segmentSize / _speed;
     }
@@ -60,9 +58,30 @@ public class MovableObject extends GameObject {
     public boolean ready() {
         return _moveState == 0;
     }
+    
+    // direction -> 1 - left, 2 - up, 3 - right, 4 down
+    public void move(int direction)
+    {
+        switch(direction)
+        {
+            case 1:
+                moveLeft();
+                break;
+            case 2:
+                moveUp();
+                break;
+            case 3:
+                moveRight();
+                break;
+            case 4:
+                moveDown();
+                break;
+        }
+    }
 
     public void moveUp() {
         if (ready()) {
+            _meshPosY--;
             _destX = _posX;
             _destY = _posY - _segmentSize;
             _movingProgress = 0;
@@ -72,6 +91,7 @@ public class MovableObject extends GameObject {
 
     public void moveDown() {
         if (ready()) {
+            _meshPosY++;
             _destX = _posX;
             _destY = _posY + _segmentSize;
             _movingProgress = 0;
@@ -81,6 +101,7 @@ public class MovableObject extends GameObject {
 
     public void moveLeft() {
         if (ready()) {
+            _meshPosX--;
             _destX = _posX - _segmentSize;
             _destY = _posY;
             _movingProgress = 0;
@@ -90,6 +111,7 @@ public class MovableObject extends GameObject {
 
     public void moveRight() {
         if (ready()) {
+            _meshPosX++;
             _destX = _posX + _segmentSize;
             _destY = _posY;
             _movingProgress = 0;

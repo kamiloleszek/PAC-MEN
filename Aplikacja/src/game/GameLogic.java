@@ -33,18 +33,12 @@ public class GameLogic {
         _imageSet = imageSet;
         _mapLayout = mapLayout;
 
-        _ghost1 = new MovableObject(_imageSet.getGhost(),2);
-        _ghost2 = new MovableObject(_imageSet.getGhost(),2);
+        _ghost1 = new MovableObject(_imageSet.getGhost(),3,3,4);
+        _ghost2 = new MovableObject(_imageSet.getGhost(),3,4,4);
 
-        _pacman1 = new MovableObject(_imageSet.getPacman(),5);
-        _pacman2 = new MovableObject(_imageSet.getPacman(),5);
+        _pacman1 = new MovableObject(_imageSet.getPacman(),3,5,4);
+        _pacman2 = new MovableObject(_imageSet.getPacman(),3,6,4);
         
-        _pacman1.setX(120);
-        _pacman1.setY(130);
-        
-        _pacman2.setX(450);
-        _pacman2.setY(130);
-
         _gameObjectsCollection.add(_ghost1);
         _gameObjectsCollection.add(_ghost2);
         _gameObjectsCollection.add(_pacman1);
@@ -72,21 +66,21 @@ public class GameLogic {
 
     public void keyActionPressed(int keyCode) {             
         if(keyCode == _settings.getPlayer1DownKeyCode()) {
-            _pacman1.moveDown();
+            if(checkMoveOnObject(_pacman1,4))_pacman1.moveDown();
         } else if(keyCode == _settings.getPlayer1UpKeyCode()) {
-            _pacman1.moveUp();
+            if(checkMoveOnObject(_pacman1,2))_pacman1.moveUp();
         } else if(keyCode == _settings.getPlayer1LeftKeyCode()) {
-            _pacman1.moveLeft();
+            if(checkMoveOnObject(_pacman1,1))_pacman1.moveLeft();
         } else if(keyCode == _settings.getPlayer1RightKeyCode()) {
-            _pacman1.moveRight();
+            if(checkMoveOnObject(_pacman1,3))_pacman1.moveRight();
         } else if(keyCode == _settings.getPlayer2DownKeyCode()) {
-            _pacman2.moveDown();
+            if(checkMoveOnObject(_pacman2,4))_pacman2.moveDown();
         } else if(keyCode == _settings.getPlayer2UpKeyCode()) {
-            _pacman2.moveUp();
+            if(checkMoveOnObject(_pacman2,2))_pacman2.moveUp();
         } else if(keyCode == _settings.getPlayer2LeftKeyCode()) {
-            _pacman2.moveLeft();
+            if(checkMoveOnObject(_pacman2,1))_pacman2.moveLeft();
         } else if(keyCode == _settings.getPlayer2RightKeyCode()) {
-            _pacman2.moveRight();
+            if(checkMoveOnObject(_pacman2,3))_pacman2.moveRight();
         }
     }
 
@@ -96,6 +90,29 @@ public class GameLogic {
 
     public ArrayList<DrawableObject> getGameObjects() {
         return _gameObjectsCollection;
+    }
+    
+    private boolean checkMoveOnObject(MovableObject obj, int moveDirection)
+    {
+        return checkMove(obj.getMeshPosX(),obj.getMeshPosY(),moveDirection);
+    }
+    
+    //Move direction ->  1 - left, 2 - up, 3 - right, 4 down
+    private boolean checkMove(int posX, int posY, int moveDirection)
+    {
+        switch(moveDirection){
+            case 1:
+                return _mapLayout.getValueByPos(posX-1, posY) == 0;
+            case 2:
+                return _mapLayout.getValueByPos(posX, posY-1) == 0;
+            case 3:
+                return _mapLayout.getValueByPos(posX+1, posY) == 0;
+            case 4:
+                return _mapLayout.getValueByPos(posX, posY+1) == 0;
+            default:
+                return false;
+        }
+
     }
 
 }

@@ -15,13 +15,21 @@ public class GameObject implements DrawableObject{
     
     protected int _posX;
     protected int _posY;
+    protected int _meshPosX;
+    protected int _meshPosY;
+    protected int _segmentSize;
     protected BufferedImage[] _images;
     private int currentImage;
     private boolean animDirection;
     
-    public GameObject(BufferedImage[] images){
+    public GameObject(BufferedImage[] images, int meshPosX, int meshPosY){
         _images = images;
+        _meshPosX = meshPosX;
+        _meshPosY = meshPosY;
+        _segmentSize = images[0].getHeight();
         currentImage = 0;
+        _posX = (meshPosX-1) * _segmentSize;
+        _posY = (meshPosY-1) * _segmentSize;
         animDirection = true;
     }
     
@@ -42,9 +50,20 @@ public class GameObject implements DrawableObject{
     public int getY() {
         return _posY;
     }
+    
+    public int getMeshPosX()
+    {
+        return _meshPosX;
+    }
+    
+    public int getMeshPosY()
+    {
+        return _meshPosY;
+    }
 
     @Override
     public BufferedImage getImage() {
+        /*
         if(animDirection) {
             if(currentImage == _images.length-1) {
                 animDirection = !animDirection; 
@@ -58,7 +77,8 @@ public class GameObject implements DrawableObject{
                 --currentImage;
             }
         }
-        return _images[currentImage];
+*/
+        return _images[0];
     }
     
     

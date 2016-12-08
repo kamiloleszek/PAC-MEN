@@ -89,6 +89,15 @@ public class MapLayout {
         return _layout;
     }
     
+    public int getValueByPos(int x, int y)
+    {
+        if(x >= 0 && x < _width && y >= 0 && y < _height)
+        {
+            return _layout[x][y];
+        }
+        return 0;
+    }
+    
     private int _width;
     private int _height;
     private int[][] _layout;
