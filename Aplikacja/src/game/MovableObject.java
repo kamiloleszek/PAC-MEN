@@ -49,9 +49,7 @@ public class MovableObject extends GameObject {
                         _posY += _speed;
                         break;
                 }
-
             }
-
         }
     }
 

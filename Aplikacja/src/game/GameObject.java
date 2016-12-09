@@ -20,17 +20,17 @@ public class GameObject implements DrawableObject{
     protected int _segmentSize;
     protected BufferedImage[] _images;
     private int currentImage;
-    private boolean animDirection;
+    //private boolean animDirection;
     
     public GameObject(BufferedImage[] images, int meshPosX, int meshPosY){
         _images = images;
         _meshPosX = meshPosX;
         _meshPosY = meshPosY;
         _segmentSize = images[0].getHeight();
-        currentImage = 0;
+        currentImage = -1;
         _posX = (meshPosX-1) * _segmentSize;
         _posY = (meshPosY-1) * _segmentSize;
-        animDirection = true;
+        //animDirection = true;
     }
     
     public void setX(int x){
@@ -63,22 +63,8 @@ public class GameObject implements DrawableObject{
 
     @Override
     public BufferedImage getImage() {
-        /*
-        if(animDirection) {
-            if(currentImage == _images.length-1) {
-                animDirection = !animDirection; 
-            } else {
-                ++currentImage;
-            }
-        } else {
-            if(currentImage == 0) {
-                animDirection = !animDirection; 
-            } else {
-                --currentImage;
-            }
-        }
-*/
-        return _images[0];
+        currentImage = ++currentImage % _images.length;
+        return _images[currentImage ];
     }
     
     

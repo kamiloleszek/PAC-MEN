@@ -47,7 +47,7 @@ public class MapBuilder {
     {
         int usedSegment = 0;
         int rotation = 0;
-        if(layout[i][j] == 0)usedSegment = 0;
+        if(layout[i][j] != 1)usedSegment = 0;
         else
         {
             int neighbours = 0;
@@ -92,10 +92,10 @@ public class MapBuilder {
             else if(neighbours == 3)
             {
                 usedSegment = 2;
-                if(layout[i][j-1] == 0)rotation = 0;
-                if(layout[i+1][j] == 0)rotation = 90;
-                if(layout[i][j+1] == 0)rotation = 180;
-                if(layout[i-1][j] == 0)rotation = 270;
+                if(layout[i][j-1] != 1)rotation = 0;
+                if(layout[i+1][j] != 1)rotation = 90;
+                if(layout[i][j+1] != 1)rotation = 180;
+                if(layout[i-1][j] != 1)rotation = 270;
             }
             else if(neighbours == 4)usedSegment = 3;
 

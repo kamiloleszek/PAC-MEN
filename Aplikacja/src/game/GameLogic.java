@@ -7,7 +7,6 @@ package game;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Properties;
 import utils.Settings;
 
 /**
@@ -24,8 +23,11 @@ public class GameLogic {
 
     private MovableObject _ghost1;
     private MovableObject _ghost2;
+    private MovableObject _ghost3;
+    private MovableObject _ghost4;
     private MovableObject _pacman1;
     private MovableObject _pacman2;
+    private GameObject _coin;
 
     public GameLogic(MapLayout mapLayout, Settings settings, ImageSet imageSet) {
         _gameObjectsCollection = new ArrayList<DrawableObject>();
@@ -33,19 +35,19 @@ public class GameLogic {
         _imageSet = imageSet;
         _mapLayout = mapLayout;
 
-        _ghost1 = new MovableObject(_imageSet.getGhost(),3,3,4);
-        _ghost2 = new MovableObject(_imageSet.getGhost(),3,4,4);
-
-        _pacman1 = new MovableObject(_imageSet.getPacman(),3,5,4);
-        _pacman2 = new MovableObject(_imageSet.getPacman(),3,6,4);
+        setInitialObjectsPositions();
         
         _gameObjectsCollection.add(_ghost1);
         _gameObjectsCollection.add(_ghost2);
+        _gameObjectsCollection.add(_ghost3);
+        _gameObjectsCollection.add(_ghost4);
         _gameObjectsCollection.add(_pacman1);
         _gameObjectsCollection.add(_pacman2);
         
         _gameMovableCollection.add(_ghost1);
         _gameMovableCollection.add(_ghost2);
+        _gameMovableCollection.add(_ghost3);
+        _gameMovableCollection.add(_ghost4);
         _gameMovableCollection.add(_pacman1);
         _gameMovableCollection.add(_pacman2);
         
@@ -54,14 +56,13 @@ public class GameLogic {
 
     public BufferedImage getMap() {
         return MapBuilder.createMap(_imageSet, _mapLayout);
-    }
+    }   
 
     public void updateLogic() {
         for(MovableObject obj : _gameMovableCollection)
         {
             obj.update();
         }
-
     }
 
     public void keyActionPressed(int keyCode) {             
@@ -102,17 +103,52 @@ public class GameLogic {
     {
         switch(moveDirection){
             case 1:
-                return _mapLayout.getValueByPos(posX-1, posY) == 0;
+                return _mapLayout.getValueByPos(posX-1, posY) != 1;
             case 2:
-                return _mapLayout.getValueByPos(posX, posY-1) == 0;
+                return _mapLayout.getValueByPos(posX, posY-1) != 1;
             case 3:
-                return _mapLayout.getValueByPos(posX+1, posY) == 0;
+                return _mapLayout.getValueByPos(posX+1, posY) != 1;
             case 4:
-                return _mapLayout.getValueByPos(posX, posY+1) == 0;
+                return _mapLayout.getValueByPos(posX, posY+1) != 1;
             default:
                 return false;
         }
-
     }
-
+    
+    private void setInitialObjectsPositions() {
+        int segmentXNum = _mapLayout.getWidth() - 1;
+        int segmentYNum = _mapLayout.getHeight() - 1;
+        
+        for(int i = 1; i < segmentXNum; ++i) {
+            for(int j = 1; j < segmentYNum; ++j) {
+                switch(_mapLayout.getValueByPos(i, j)) {
+                    case 2:
+                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
+                        break;
+                    case 3:
+                        _pacman1 = new MovableObject(_imageSet.getPacman(), i, j, 4);
+                        break;
+                    case 4:
+                        _pacman2 = new MovableObject(_imageSet.getPacman(), i, j, 4);
+                        break;
+                    case 5:
+                        _ghost1 = new MovableObject(_imageSet.getGhost1(), i, j, 4);
+                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
+                        break;
+                    case 6:
+                        _ghost2 = new MovableObject(_imageSet.getGhost2(), i, j, 4);
+                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
+                        break;
+                    case 7:
+                        _ghost3 = new MovableObject(_imageSet.getGhost3(), i, j, 4);
+                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
+                        break;
+                    case 8:
+                        _ghost4 = new MovableObject(_imageSet.getGhost4(), i, j, 4);
+                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
+                        break;
+                }
+            }
+        }
+    }
 }
