@@ -68,6 +68,8 @@ public class GameFrame extends javax.swing.JFrame{
     private void updateGame()
     {
         ((GamePanel)gamePanel).updateGame();
+        player1Score.setText(Integer.toString(((GamePanel)gamePanel).getPlayer1Score()));
+        player2Score.setText(Integer.toString(((GamePanel)gamePanel).getPlayer2Score()));
     }
         
     private void drawGame()
@@ -88,6 +90,10 @@ public class GameFrame extends javax.swing.JFrame{
     private void initComponents() {
 
         gamePanel = new GamePanel();
+        player1Name = new javax.swing.JLabel();
+        player2Name = new javax.swing.JLabel();
+        player1Score = new javax.swing.JLabel();
+        player2Score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,27 +103,56 @@ public class GameFrame extends javax.swing.JFrame{
         gamePanel.setLayout(gamePanelLayout);
         gamePanelLayout.setHorizontalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 621, Short.MAX_VALUE)
+            .addGap(0, 466, Short.MAX_VALUE)
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
+
+        player1Name.setText("Gracz 1");
+
+        player2Name.setText("Gracz 2");
+
+        player1Score.setText("jLabel3");
+
+        player2Score.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(player1Name)
+                    .addComponent(player1Score))
+                .addGap(0, 0, 0)
+                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(player2Name, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(player2Score, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(player1Name)
+                                .addGap(47, 47, 47)
+                                .addComponent(player1Score))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(88, 88, 88)
+                                .addComponent(player2Name)
+                                .addGap(46, 46, 46)
+                                .addComponent(player2Score)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -168,6 +203,10 @@ public class GameFrame extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel gamePanel;
+    private javax.swing.JLabel player1Name;
+    private javax.swing.JLabel player1Score;
+    private javax.swing.JLabel player2Name;
+    private javax.swing.JLabel player2Score;
     // End of variables declaration//GEN-END:variables
 
 }

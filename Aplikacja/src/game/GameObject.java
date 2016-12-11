@@ -20,6 +20,7 @@ public class GameObject implements DrawableObject{
     protected int _segmentSize;
     protected BufferedImage[] _images;
     private int currentImage;
+    private boolean _isVisible = true;
     //private boolean animDirection;
     
     public GameObject(BufferedImage[] images, int meshPosX, int meshPosY){
@@ -65,6 +66,23 @@ public class GameObject implements DrawableObject{
     public BufferedImage getImage() {
         currentImage = ++currentImage % _images.length;
         return _images[currentImage ];
+    }
+    
+    @Override
+    public boolean isVisible()
+    {
+        return _isVisible;
+    }
+    
+    public void setVisibility(boolean option)
+    {
+        _isVisible = option;
+    }
+    
+    @Override
+    public void update()
+    {
+        
     }
     
     

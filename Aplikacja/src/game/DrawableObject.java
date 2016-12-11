@@ -14,5 +14,7 @@ import java.awt.image.BufferedImage;
 public interface DrawableObject {
     public int getX();
     public int getY();
-    public BufferedImage getImage();    
+    public boolean isVisible();
+    public BufferedImage getImage();
+    public void update();
 }

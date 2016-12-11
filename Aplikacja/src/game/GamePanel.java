@@ -61,13 +61,26 @@ public class GamePanel extends JPanel  implements KeyListener{
         
         for(DrawableObject obj : _gameObjects)
         {
-            g2d.drawImage(obj.getImage(), null, obj.getX(), obj.getY());
+            if(obj.isVisible())
+            {
+                g2d.drawImage(obj.getImage(), null, obj.getX(), obj.getY());
+            }
         }
     }
     
     public void updateGame()
     {
         _gameLogic.updateLogic();
+    }
+    
+    public int getPlayer1Score()
+    {
+        return _gameLogic.getPlayer1Score();
+    }
+    
+    public int getPlayer2Score()
+    {
+        return _gameLogic.getPlayer2Score();
     }
 
     @Override

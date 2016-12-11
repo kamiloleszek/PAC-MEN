@@ -25,13 +25,12 @@ public class GameLogic {
     private MovableObject _ghost2;
     private MovableObject _ghost3;
     private MovableObject _ghost4;
-    private MovableObject _pacman1;
-    private MovableObject _pacman2;
+    private PacMan _pacman1;
+    private PacMan _pacman2;
     private GameObject _coin;
 
     public GameLogic(MapLayout mapLayout, Settings settings, ImageSet imageSet) {
         _gameObjectsCollection = new ArrayList<DrawableObject>();
-        _gameMovableCollection= new ArrayList<MovableObject>();
         _imageSet = imageSet;
         _mapLayout = mapLayout;
 
@@ -43,14 +42,7 @@ public class GameLogic {
         _gameObjectsCollection.add(_ghost4);
         _gameObjectsCollection.add(_pacman1);
         _gameObjectsCollection.add(_pacman2);
-        
-        _gameMovableCollection.add(_ghost1);
-        _gameMovableCollection.add(_ghost2);
-        _gameMovableCollection.add(_ghost3);
-        _gameMovableCollection.add(_ghost4);
-        _gameMovableCollection.add(_pacman1);
-        _gameMovableCollection.add(_pacman2);
-        
+                
         _settings = settings;
     }
 
@@ -59,7 +51,7 @@ public class GameLogic {
     }   
 
     public void updateLogic() {
-        for(MovableObject obj : _gameMovableCollection)
+        for(DrawableObject obj : _gameObjectsCollection)
         {
             obj.update();
         }
@@ -115,21 +107,38 @@ public class GameLogic {
         }
     }
     
+    public int getPlayer1Score()
+    {
+        return _pacman1.getScore();
+    }
+    
+    public int getPlayer2Score()
+    {
+        return _pacman2.getScore();
+    }
+    
     private void setInitialObjectsPositions() {
         int segmentXNum = _mapLayout.getWidth() - 1;
         int segmentYNum = _mapLayout.getHeight() - 1;
         
         for(int i = 1; i < segmentXNum; ++i) {
             for(int j = 1; j < segmentYNum; ++j) {
+                if(_mapLayout.getCoinsByPos(i, j) == 1)
+                {
+                    _gameObjectsCollection.add(new Coin(_imageSet.getCoin(), i, j, _mapLayout));
+                }
+            }
+        }
+        
+        
+        for(int i = 1; i < segmentXNum; ++i) {
+            for(int j = 1; j < segmentYNum; ++j) {
                 switch(_mapLayout.getValueByPos(i, j)) {
-                    case 2:
-                        _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
-                        break;
                     case 3:
-                        _pacman1 = new MovableObject(_imageSet.getPacman(), i, j, 4);
+                        _pacman1 = new PacMan(_imageSet.getPacman(), i, j, 4, _mapLayout);
                         break;
                     case 4:
-                        _pacman2 = new MovableObject(_imageSet.getPacman(), i, j, 4);
+                        _pacman2 = new PacMan(_imageSet.getPacman(), i, j, 4, _mapLayout);
                         break;
                     case 5:
                         _ghost1 = new MovableObject(_imageSet.getGhost1(), i, j, 4);
