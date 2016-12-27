@@ -21,10 +21,10 @@ public class GameLogic {
     private MapLayout _mapLayout;
     private Settings _settings;
 
-    private MovableObject _ghost1;
-    private MovableObject _ghost2;
-    private MovableObject _ghost3;
-    private MovableObject _ghost4;
+    private Ghost _ghost1;
+    private Ghost _ghost2;
+    private Ghost _ghost3;
+    private Ghost _ghost4;
     private PacMan _pacman1;
     private PacMan _pacman2;
     private GameObject _coin;
@@ -57,24 +57,90 @@ public class GameLogic {
         }
     }
 
-    public void keyActionPressed(int keyCode) {             
+    public void keyActionPressed(int keyCode) { 
+        int direction;
         if(keyCode == _settings.getPlayer1DownKeyCode()) {
-            if(checkMoveOnObject(_pacman1,4))_pacman1.moveDown();
+            if(checkMoveOnObject(_pacman1,4)){
+                _pacman1.moveDown();
+                fillDistanceLayout(_pacman1, _ghost1);
+                direction = _ghost1.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost1,direction))_ghost1.move(direction);
+                fillDistanceLayout(_pacman1, _ghost2);
+                direction = _ghost2.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost2,direction))_ghost2.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer1UpKeyCode()) {
-            if(checkMoveOnObject(_pacman1,2))_pacman1.moveUp();
+            if(checkMoveOnObject(_pacman1,2)){
+                _pacman1.moveUp();
+                fillDistanceLayout(_pacman1, _ghost1);
+                direction = _ghost1.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost1,direction))_ghost1.move(direction);
+                fillDistanceLayout(_pacman1, _ghost2);
+                direction = _ghost2.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost2,direction))_ghost2.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer1LeftKeyCode()) {
-            if(checkMoveOnObject(_pacman1,1))_pacman1.moveLeft();
+            if(checkMoveOnObject(_pacman1,1)){
+                _pacman1.moveLeft();
+                fillDistanceLayout(_pacman1, _ghost1);
+                direction = _ghost1.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost1,direction))_ghost1.move(direction);
+                fillDistanceLayout(_pacman1, _ghost2);
+                direction = _ghost2.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost2,direction))_ghost2.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer1RightKeyCode()) {
-            if(checkMoveOnObject(_pacman1,3))_pacman1.moveRight();
+            if(checkMoveOnObject(_pacman1,3)){
+                _pacman1.moveRight();
+                fillDistanceLayout(_pacman1, _ghost1);
+                direction = _ghost1.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost1,direction))_ghost1.move(direction);
+                fillDistanceLayout(_pacman1, _ghost2);
+                direction = _ghost2.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost2,direction))_ghost2.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer2DownKeyCode()) {
-            if(checkMoveOnObject(_pacman2,4))_pacman2.moveDown();
+            if(checkMoveOnObject(_pacman2,4)){
+                _pacman2.moveDown();
+                fillDistanceLayout(_pacman2, _ghost3);
+                direction = _ghost3.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost3,direction))_ghost3.move(direction);
+                fillDistanceLayout(_pacman2, _ghost4);
+                direction = _ghost4.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost4,direction))_ghost4.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer2UpKeyCode()) {
-            if(checkMoveOnObject(_pacman2,2))_pacman2.moveUp();
+            if(checkMoveOnObject(_pacman2,2)){
+                _pacman2.moveUp();
+                fillDistanceLayout(_pacman2, _ghost3);
+                direction = _ghost3.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost3,direction))_ghost3.move(direction);
+                fillDistanceLayout(_pacman2, _ghost4);
+                direction = _ghost4.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost4,direction))_ghost4.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer2LeftKeyCode()) {
-            if(checkMoveOnObject(_pacman2,1))_pacman2.moveLeft();
+            if(checkMoveOnObject(_pacman2,1)){
+                _pacman2.moveLeft();
+                fillDistanceLayout(_pacman2, _ghost3);
+                direction = _ghost3.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost3,direction))_ghost3.move(direction);
+                fillDistanceLayout(_pacman2, _ghost4);
+                direction = _ghost4.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost4,direction))_ghost4.move(direction);
+            }
         } else if(keyCode == _settings.getPlayer2RightKeyCode()) {
-            if(checkMoveOnObject(_pacman2,3))_pacman2.moveRight();
+            if(checkMoveOnObject(_pacman2,3)){
+                _pacman2.moveRight();
+                fillDistanceLayout(_pacman2, _ghost3);
+                direction = _ghost3.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost3,direction))_ghost3.move(direction);
+                fillDistanceLayout(_pacman2, _ghost4);
+                direction = _ghost4.getDirection(_mapLayout);
+                if(checkMoveOnObject(_ghost4,direction))_ghost4.move(direction);
+            }
         }
+        
     }
 
     public void keyActionReleased(int keyCode) {
@@ -88,6 +154,11 @@ public class GameLogic {
     private boolean checkMoveOnObject(MovableObject obj, int moveDirection)
     {
         return checkMove(obj.getMeshPosX(),obj.getMeshPosY(),moveDirection);
+    }
+    
+    private void fillDistanceLayout(MovableObject obj1, MovableObject obj2){
+        _mapLayout.clearDistanceLayout(obj1.getMeshPosX(), obj1.getMeshPosY());
+        _mapLayout.setDistanceLayout(obj1.getMeshPosX(), obj1.getMeshPosY(),obj2.getMeshPosX(), obj2.getMeshPosY());
     }
     
     //Move direction ->  1 - left, 2 - up, 3 - right, 4 down
@@ -141,19 +212,19 @@ public class GameLogic {
                         _pacman2 = new PacMan(_imageSet.getPacman(), i, j, 4, _mapLayout);
                         break;
                     case 5:
-                        _ghost1 = new MovableObject(_imageSet.getGhost1(), i, j, 4);
+                        _ghost1 = new Ghost(_imageSet.getGhost1(), i, j, 4,_pacman1);
                         _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
                         break;
                     case 6:
-                        _ghost2 = new MovableObject(_imageSet.getGhost2(), i, j, 4);
+                        _ghost2 = new Ghost(_imageSet.getGhost2(), i, j, 4,_pacman1);
                         _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
                         break;
                     case 7:
-                        _ghost3 = new MovableObject(_imageSet.getGhost3(), i, j, 4);
+                        _ghost3 = new Ghost(_imageSet.getGhost3(), i, j, 4,_pacman1);
                         _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
                         break;
                     case 8:
-                        _ghost4 = new MovableObject(_imageSet.getGhost4(), i, j, 4);
+                        _ghost4 = new Ghost(_imageSet.getGhost4(), i, j, 4,_pacman1);
                         _gameObjectsCollection.add(new GameObject(_imageSet.getCoin(), i, j));
                         break;
                 }

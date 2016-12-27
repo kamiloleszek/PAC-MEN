@@ -40,6 +40,7 @@ public class MapLayout {
                         _height = Integer.parseInt(fields[1]);
                         _layout = new int[_width][_height];
                         _coinsLayout = new int[_width][_height];
+                        _distanceLayout = new int[_width][_height];
                     }
                     else
                     {
@@ -102,6 +103,50 @@ public class MapLayout {
         return _coinsLayout;
     }
     
+    public void clearDistanceLayout(int x, int y){
+        for(int i = 0; i < _width; i++){
+            for(int j = 0; j< _height; j++){
+                _distanceLayout[i][j] = 0;
+            }
+        }
+    }
+    
+    public void setDistanceLayout(int x, int y, int x_g, int y_g){
+        if(x==x_g && y==y_g) return;
+        if(x >= 0 && x < _width && y-1 >= 0 && y-1 < _height)
+            if(getValueByPos(x,y-1)!= 1 && (_distanceLayout[x][y-1]==0 || _distanceLayout[x][y]+1 < _distanceLayout[x][y-1])){
+                _distanceLayout[x][y-1] = _distanceLayout[x][y]+1;
+                setDistanceLayout(x,y-1, x_g, y_g);
+            }
+        
+        if(x >= 0 && x < _width && y+1 >= 0 && y+1 < _height)
+            if(getValueByPos(x,y+1)!= 1 && (_distanceLayout[x][y+1]==0 || _distanceLayout[x][y]+1 < _distanceLayout[x][y+1])){
+                _distanceLayout[x][y+1] = _distanceLayout[x][y]+1;
+                setDistanceLayout(x,y+1,x_g, y_g);
+            }
+        
+        if(x-1 >= 0 && x-1 < _width && y-1 >= 0 && y-1 < _height)
+            if(getValueByPos(x-1,y)!= 1 && (_distanceLayout[x-1][y]==0 || _distanceLayout[x][y]+1 < _distanceLayout[x-1][y])){
+                _distanceLayout[x-1][y] = _distanceLayout[x][y]+1;
+                setDistanceLayout(x-1,y,x_g, y_g);
+            }
+        
+        if(x+1 >= 0 && x+1 < _width && y-1 >= 0 && y-1 < _height)
+            if(getValueByPos(x+1,y)!= 1 && (_distanceLayout[x+1][y]==0 || _distanceLayout[x][y]+1 < _distanceLayout[x+1][y])){
+                _distanceLayout[x+1][y] = _distanceLayout[x][y]+1;
+                setDistanceLayout(x+1,y,x_g, y_g);
+            }
+    }
+    
+    public int getDistanceValueByPos(int x, int y)
+    {
+        if(x >= 0 && x < _width && y >= 0 && y < _height)
+        {
+            return _distanceLayout[x][y];
+        }
+        return 0;
+    }
+    
     public int getCoinsByPos(int x, int y)
     {
         if(x >= 0 && x < _width && y >= 0 && y < _height)
@@ -138,6 +183,7 @@ public class MapLayout {
     private int _height;
     private int[][] _layout;
     private int[][] _coinsLayout;
+    private int[][] _distanceLayout;
     private int _totalCoins = 0;
     
 }
