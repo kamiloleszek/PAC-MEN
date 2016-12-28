@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
  *
  * @author gregory
  */
-public class GameObject implements DrawableObject{
-    
+public class GameObject implements DrawableObject {
+
     protected int _posX;
     protected int _posY;
     protected int _meshPosX;
@@ -22,23 +22,23 @@ public class GameObject implements DrawableObject{
     private int currentImage;
     private boolean _isVisible = true;
     //private boolean animDirection;
-    
-    public GameObject(BufferedImage[] images, int meshPosX, int meshPosY){
+
+    public GameObject(BufferedImage[] images, int meshPosX, int meshPosY) {
         _images = images;
         _meshPosX = meshPosX;
         _meshPosY = meshPosY;
         _segmentSize = images[0].getHeight();
         currentImage = -1;
-        _posX = (meshPosX-1) * _segmentSize;
-        _posY = (meshPosY-1) * _segmentSize;
+        _posX = (meshPosX - 1) * _segmentSize;
+        _posY = (meshPosY - 1) * _segmentSize;
         //animDirection = true;
     }
-    
-    public void setX(int x){
+
+    public void setX(int x) {
         _posX = x;
     }
-    
-    public void setY(int y){
+
+    public void setY(int y) {
         _posY = y;
     }
 
@@ -51,39 +51,37 @@ public class GameObject implements DrawableObject{
     public int getY() {
         return _posY;
     }
-    
-    public int getMeshPosX()
-    {
+
+    public int getMeshPosX() {
         return _meshPosX;
     }
-    
-    public int getMeshPosY()
-    {
+
+    public int getMeshPosY() {
         return _meshPosY;
+    }
+
+    public void setImages(BufferedImage[] _images) {
+        this._images = _images;
     }
 
     @Override
     public BufferedImage getImage() {
         currentImage = ++currentImage % _images.length;
-        return _images[currentImage ];
+        return _images[currentImage];
     }
-    
+
     @Override
-    public boolean isVisible()
-    {
+    public boolean isVisible() {
         return _isVisible;
     }
-    
-    public void setVisibility(boolean option)
-    {
+
+    public void setVisibility(boolean option) {
         _isVisible = option;
     }
-    
+
     @Override
-    public void update()
-    {
-        
+    public void update() {
+
     }
-    
-    
+
 }

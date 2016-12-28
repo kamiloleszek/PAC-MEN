@@ -45,5 +45,4 @@ public class Ghost extends MovableObject {
             direction = 4;
         }
     }
-
 }
