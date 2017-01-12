@@ -18,6 +18,8 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        bestScoresMenu = new BestScoresMenu();
+        settingsMenu = new SettingsMenu();
     }
 
     /**
@@ -53,6 +55,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jButton3.setText("Wyniki");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         menuExitButton.setText("Wyjdź");
         menuExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,8 +125,13 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuExitButtonActionPerformed
 
     private void showSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showSettingsButtonActionPerformed
-        new SettingsMenu().show();
+       settingsMenu.show();
     }//GEN-LAST:event_showSettingsButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        bestScoresMenu.refreshResults();
+        bestScoresMenu.show();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +168,9 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
 
+    private SettingsMenu settingsMenu;
+    private BestScoresMenu bestScoresMenu;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
