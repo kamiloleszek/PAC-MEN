@@ -5,9 +5,7 @@
  */
 package utils;
 
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXUIFactory;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,11 +25,10 @@ public class Settings {
         this.setKeyCodes();       
     }
     
-    public void saveSettings(String difficulty, String player1Up, String player1Down, String player1Left, String player1Right,
+    public void saveSettings(String player1Up, String player1Down, String player1Left, String player1Right,
             String player2Up, String player2Down, String player2Left, String player2Right) {
         try {
             output = new FileOutputStream(PROPERTIES_FILENAME);
-            properties.setProperty("difficulty", difficulty);
             properties.setProperty("player1Up", player1Up.toUpperCase());
             properties.setProperty("player1Down", player1Down.toUpperCase());
             properties.setProperty("player1Left", player1Left.toUpperCase());
@@ -111,6 +108,54 @@ public class Settings {
     
     public int getPlayer2RightKeyCode() {
        return player2RightKeyCode; 
+    }
+    
+    public String getPlayer1DownButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player1Down");
+    }
+    
+    public String getPlayer1UpButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player1Up");
+    }
+    
+    public String getPlayer1LeftButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player1Left");
+    }
+    
+    public String getPlayer1RightButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player1Right");
+    }
+    
+    public String getPlayer2DownButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player2Down");
+    }
+    
+    public String getPlayer2UpButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player2Up");
+    }
+    
+    public String getPlayer2LeftButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player2Left");
+    }
+    
+    public String getPlayer2RightButton() throws IOException {
+        InputStream input = new FileInputStream(PROPERTIES_FILENAME);
+        properties.load(input);
+        return properties.getProperty("player2Right");
     }
     
     

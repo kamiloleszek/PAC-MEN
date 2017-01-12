@@ -5,9 +5,10 @@
  */
 package menu;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.StyledDocument;
 import utils.DocumentSizeFilter;
 import utils.Settings;
 
@@ -23,6 +24,7 @@ public class SettingsMenu extends javax.swing.JFrame {
     public SettingsMenu() {
         initComponents();
         addDocumentFilters();
+        initTextFields();
     }
 
     /**
@@ -36,8 +38,6 @@ public class SettingsMenu extends javax.swing.JFrame {
 
         saveSettingsButton = new javax.swing.JButton();
         returnButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        difficultyComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -73,10 +73,6 @@ public class SettingsMenu extends javax.swing.JFrame {
                 returnButtonActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Poziom trudności:");
-
-        difficultyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Łatwy", "Trudny" }));
 
         jLabel2.setText("Gracz 1 - klawisze");
 
@@ -126,11 +122,6 @@ public class SettingsMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                         .addComponent(saveSettingsButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(difficultyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -165,11 +156,7 @@ public class SettingsMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(difficultyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -224,15 +211,12 @@ public class SettingsMenu extends javax.swing.JFrame {
 
     private void saveSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSettingsButtonActionPerformed
         Settings settings = new Settings();
-        settings.saveSettings(Integer.toString(difficultyComboBox.getSelectedIndex()),
-                player1UpButton.getText(), player1DownButton.getText(), player1LeftButton.getText(), player1RightButton.getText(), 
+        settings.saveSettings(player1UpButton.getText(), player1DownButton.getText(), player1LeftButton.getText(), player1RightButton.getText(), 
                 player2UpButton.getText(), player2DownButton.getText(), player2LeftButton.getText(), player2RightButton.getText());
     }//GEN-LAST:event_saveSettingsButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox difficultyComboBox;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -264,6 +248,22 @@ public class SettingsMenu extends javax.swing.JFrame {
         addDocumentFilter(player2DownButton);
         addDocumentFilter(player2LeftButton);
         addDocumentFilter(player2RightButton);
+    }
+    
+    private void initTextFields() {
+        Settings settings = new Settings();
+        try {
+            player1DownButton.setText(settings.getPlayer1DownButton());
+            player1UpButton.setText(settings.getPlayer1UpButton());
+            player1LeftButton.setText(settings.getPlayer1LeftButton());
+            player1RightButton.setText(settings.getPlayer1RightButton());
+            player2DownButton.setText(settings.getPlayer2DownButton());
+            player2UpButton.setText(settings.getPlayer2UpButton());
+            player2LeftButton.setText(settings.getPlayer2LeftButton());
+            player2RightButton.setText(settings.getPlayer2RightButton());
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
     
     private void addDocumentFilter(JTextField textField) {
