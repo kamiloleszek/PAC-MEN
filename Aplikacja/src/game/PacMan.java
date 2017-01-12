@@ -13,14 +13,12 @@ import java.awt.image.BufferedImage;
  */
 public class PacMan extends MovableObject {
 
-    private MapLayout _mapLayout;
     private int _points = 0;
     private int[][] _distanceLayout;
     private int _width, _height;
 
     public PacMan(BufferedImage[] images, int _meshPosX, int _meshPosY, int speed, MapLayout mapLayout) {
-        super(images, _meshPosX, _meshPosY, speed);
-        _mapLayout = mapLayout;
+        super(images, _meshPosX, _meshPosY, speed, mapLayout);
         _width = _mapLayout.getWidth();
         _height = _mapLayout.getHeight();
         _distanceLayout = new int[_width][_height];

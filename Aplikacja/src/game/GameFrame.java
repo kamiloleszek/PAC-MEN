@@ -96,6 +96,9 @@ public class GameFrame extends javax.swing.JFrame{
         player2Score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 740));
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         gamePanel.setPreferredSize(new java.awt.Dimension(800, 600));
 

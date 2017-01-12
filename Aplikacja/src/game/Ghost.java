@@ -23,8 +23,8 @@ public class Ghost extends MovableObject {
         this.direction = direction;
     }
 
-    public Ghost(BufferedImage[] images, int meshPosX, int meshPosY, int speed) {
-        super(images, meshPosX, meshPosY, speed);
+    public Ghost(BufferedImage[] images, int meshPosX, int meshPosY, int speed, MapLayout mapLayout) {
+        super(images, meshPosX, meshPosY, speed, mapLayout);
     }
 
     public void changeDirection(PacMan pacman) {

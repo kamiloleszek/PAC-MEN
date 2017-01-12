@@ -275,16 +275,16 @@ public class GameLogic {
                         _pacman2 = new PacMan(_imageSet.getPacman_left(), i, j, 4, _mapLayout);
                         break;
                     case 5:
-                        _ghost1 = new Ghost(_imageSet.getGhost1_right(), i, j, 2);
+                        _ghost1 = new Ghost(_imageSet.getGhost1_right(), i, j, 2, _mapLayout);
                         break;
                     case 6:
-                        _ghost2 = new Ghost(_imageSet.getGhost2_left(), i, j, 2);
+                        _ghost2 = new Ghost(_imageSet.getGhost2_left(), i, j, 2, _mapLayout);
                         break;
                     case 7:
-                        _ghost3 = new Ghost(_imageSet.getGhost3_right(), i, j, 2);
+                        _ghost3 = new Ghost(_imageSet.getGhost3_right(), i, j, 2, _mapLayout);
                         break;
                     case 8:
-                        _ghost4 = new Ghost(_imageSet.getGhost4_left(), i, j, 2);
+                        _ghost4 = new Ghost(_imageSet.getGhost4_left(), i, j, 2, _mapLayout);
                         break;
                 }
             }

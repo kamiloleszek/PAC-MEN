@@ -19,11 +19,16 @@ public class MovableObject extends GameObject {
     private int _destX;
     private int _destY;
     private int _movingProgress = 0;
+    private int _maxX;
+    protected MapLayout _mapLayout;
 
-    public MovableObject(BufferedImage[] images, int meshPosX, int meshPosY, int speed) {
+    public MovableObject(BufferedImage[] images, int meshPosX, int meshPosY, 
+            int speed, MapLayout mapLayout) {
         super(images, meshPosX, meshPosY);
         _speed = speed;
         _movingSteps = (float) _segmentSize / _speed;
+        _mapLayout = mapLayout;
+        _maxX = _mapLayout.getWidth();
     }
 
     public void update() {
@@ -99,8 +104,13 @@ public class MovableObject extends GameObject {
 
     public void moveLeft() {
         if (ready()) {
-            _meshPosX--;
+            if(--_meshPosX <= 0) {
+                _meshPosX = _maxX -2;
+            }
             _destX = _posX - _segmentSize;
+            if(_destX < 0) {
+                _destX = _segmentSize * (_maxX - 3);
+            }
             _destY = _posY;
             _movingProgress = 0;
             _moveState = 1;
@@ -109,8 +119,13 @@ public class MovableObject extends GameObject {
 
     public void moveRight() {
         if (ready()) {
-            _meshPosX++;
+            if(++_meshPosX >=_maxX - 1) {
+                _meshPosX = 1;
+            }
             _destX = _posX + _segmentSize;
+            if(_destX >= _segmentSize * (_maxX - 2)) {
+                _destX = 0;
+            }
             _destY = _posY;
             _movingProgress = 0;
             _moveState = 3;
