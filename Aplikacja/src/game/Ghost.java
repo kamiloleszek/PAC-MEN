@@ -6,6 +6,7 @@
 package game;
 
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  *
@@ -57,17 +58,21 @@ public class Ghost extends MovableObject {
             if (_pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) != 0 && _pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) < min_val) {
                 min_val = _pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY);
                 direction = 1;
+                if(new Random().nextInt(10) == 3)direction = 3;
             }
             if (_pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) != 0 && _pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) < min_val) {
                 min_val = _pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1);
                 direction = 2;
+                if(new Random().nextInt(10) == 3)direction = 4;
             }
             if (_pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) != 0 && _pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) < min_val) {
                 min_val = _pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY);
                 direction = 3;
+                if(new Random().nextInt(10) == 3)direction = 1;
             }
             if (_pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) != 0 && _pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) < min_val) {
                 direction = 4;
+                if(new Random().nextInt(10) == 3)direction = 2;
             }
         }
     }

@@ -112,7 +112,7 @@ public class GameLogic {
                 {
                     int xDist = Math.abs(pacman._posX - ghost._posX);
                     int yDist = Math.abs(pacman._posY - ghost._posY);
-                    if(xDist < pacman._segmentSize && yDist < pacman._segmentSize)
+                    if(xDist <= pacman._segmentSize && yDist <= pacman._segmentSize)
                     {
                         pacman.kill();
                         for(Ghost ghost2 : _ghostCollection)
@@ -141,6 +141,8 @@ public class GameLogic {
             _pacman2MovingDir = _pacman2OrderedMovingDir;
         }
 
+        if(_pacman1.ready())
+        {
         if (_pacman1MovingDir == 4) {
             if (checkMoveOnObject(_pacman1, 4)) {
                 _pacman1.setImages(_imageSet.getPacman_down());
@@ -171,7 +173,13 @@ public class GameLogic {
                 _pacman1.setDistanceLayout(_pacman1.getMeshPosX(), _pacman1.getMeshPosY());
 
             }
-        } else if (_pacman2MovingDir == 4) {
+            
+        }
+        } 
+        
+        if(_pacman2.ready())
+        {
+        if (_pacman2MovingDir == 4) {
             if (checkMoveOnObject(_pacman2, 4)) {
                 _pacman2.setImages(_imageSet.getPacman_down());
                 _pacman2.moveDown();
@@ -204,6 +212,8 @@ public class GameLogic {
 
             }
         }
+        }
+              
 
     }
 
