@@ -11,13 +11,14 @@ import java.awt.image.BufferedImage;
  *
  * @author gregory
  */
-public class PacMan extends MovableObject {
+public class Pacman extends MovableObject {
 
     private int _points = 0;
     private int[][] _distanceLayout;
     private int _width, _height;
+    private boolean _alive = true;
 
-    public PacMan(BufferedImage[] images, int _meshPosX, int _meshPosY, int speed, MapLayout mapLayout) {
+    public Pacman(BufferedImage[] images, int _meshPosX, int _meshPosY, int speed, MapLayout mapLayout) {
         super(images, _meshPosX, _meshPosY, speed, mapLayout);
         _width = _mapLayout.getWidth();
         _height = _mapLayout.getHeight();
@@ -27,6 +28,16 @@ public class PacMan extends MovableObject {
 
     public int getScore() {
         return _points;
+    }
+    
+    public void kill() {
+        _alive = false;
+        setVisibility(false);
+    }
+    
+    public boolean isAlive()
+    {
+        return _alive;
     }
 
     @Override

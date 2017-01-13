@@ -14,6 +14,29 @@ import java.awt.image.BufferedImage;
 public class Ghost extends MovableObject {
 
     private int direction = 0;
+    private Pacman _pacman;
+    private boolean _alive = true;
+    
+    public void assignPacman(Pacman pacman)
+    {
+        _pacman = pacman;
+    }
+    
+    public void kill()
+    {
+        setVisibility(false);
+        _alive = false;
+    }
+    
+    public boolean isAlive()
+    {
+        return _alive;
+    }
+    
+    public Pacman getPacman()
+    {
+        return _pacman;
+    }
 
     public int getDirection() {
         return direction;
@@ -27,22 +50,25 @@ public class Ghost extends MovableObject {
         super(images, meshPosX, meshPosY, speed, mapLayout);
     }
 
-    public void changeDirection(PacMan pacman) {
-        int min_val = Integer.MAX_VALUE;
-        if (pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) != 0 && pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) < min_val) {
-            min_val = pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY);
-            direction = 1;
-        }
-        if (pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) != 0 && pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) < min_val) {
-            min_val = pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1);
-            direction = 2;
-        }
-        if (pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) != 0 && pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) < min_val) {
-            min_val = pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY);
-            direction = 3;
-        }
-        if (pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) != 0 && pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) < min_val) {
-            direction = 4;
+    public void changeDirection() {
+        if(_pacman != null)
+        {
+            int min_val = Integer.MAX_VALUE;
+            if (_pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) != 0 && _pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY) < min_val) {
+                min_val = _pacman.getDistanceValueByPos(_meshPosX - 1, _meshPosY);
+                direction = 1;
+            }
+            if (_pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) != 0 && _pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1) < min_val) {
+                min_val = _pacman.getDistanceValueByPos(_meshPosX, _meshPosY - 1);
+                direction = 2;
+            }
+            if (_pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) != 0 && _pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY) < min_val) {
+                min_val = _pacman.getDistanceValueByPos(_meshPosX + 1, _meshPosY);
+                direction = 3;
+            }
+            if (_pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) != 0 && _pacman.getDistanceValueByPos(_meshPosX, _meshPosY + 1) < min_val) {
+                direction = 4;
+            }
         }
     }
 }

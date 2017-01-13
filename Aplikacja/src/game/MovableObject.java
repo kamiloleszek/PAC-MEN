@@ -32,7 +32,7 @@ public class MovableObject extends GameObject {
     }
 
     public void update() {
-        if (!ready()) {
+        if (!ready() && isVisible()) {
             _movingProgress++;
             if (_movingProgress >= _movingSteps) {
                 _movingProgress = 0;

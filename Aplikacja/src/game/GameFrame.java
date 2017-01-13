@@ -15,13 +15,19 @@ import java.awt.event.KeyListener;
  */
 public class GameFrame extends javax.swing.JFrame{
 
-    private boolean running = false;
+    private static boolean running = false;
     /**
      * Creates new form gameFrame
      */
     public GameFrame() {
         initComponents();
         runGameLoop();
+    }
+    
+    public static void stopGame()
+    {
+        running = false;
+        
     }
     
     public void runGameLoop()
@@ -62,6 +68,7 @@ public class GameFrame extends javax.swing.JFrame{
             }
             
         }
+        dispose();
         
     }
     
